@@ -16,7 +16,11 @@ export class TrafficStatsController {
     type: Number,
   })
   async getTrafficStats(): Promise<{ totalVisits: number }> {
-    const totalVisits = await this.trafficStatsService.getTotalVisits();
-    return { totalVisits };
+    try {
+      const totalVisits  = await this.trafficStatsService.getTotalVisits();
+      return { totalVisits };
+    } catch (e) {
+      throw new Error(e.message);
+    }
   }
 }
